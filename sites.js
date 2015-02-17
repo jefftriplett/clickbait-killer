@@ -12,28 +12,16 @@ function addsite(){
 		sites[sites.length] = newsite;
 		alert("test: " + newsite);
 		chrome.storage.sync.set({"blacklist": sites}, function(){});
-		initialize();
+		$("#sitelist").append("<p>" + newsite + "<p>");
 	});
 }
 
 function initialize(){
-
-	// Do initialization - they have never been here befor
-	var sites = null;
-
-		chrome.storage.sync.get("blacklist", function(data){
-			if(data.blacklist == null){
-			var defaults = ['sueddeutsche.de', 'spiegel.de', 'petflow.com', 'upworthy.com', 'lifebuzz.com', 'oddcrunch.com'];
-	
-			// Store the default	
-			chrome.storage.sync.set({"blacklist": defaults}, function(){});
-		}
-	});
-
-	
+	// Do initialization - they have never been here before
+	initializeStorage();
 
 	// Now grab them
-	chrome.storage.sync.get("blacklist", function(data){
+	chrome.storage.sync.get("blacklist", function(data) {
 		sites = data.blacklist
 	
 		for(site = 0; site < sites.length; site++){
