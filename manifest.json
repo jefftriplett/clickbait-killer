@@ -15,7 +15,7 @@
    "content_scripts": [
     {
       "matches": ["https://www.facebook.com/*"],
-      //"css": ["mystyles.css"],
+      "css": ["main.css"],
       "js": ["third-party/jquery-2.1.1.min.js", "common.js", "removecb.js"]
     }
   ]

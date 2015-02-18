@@ -10,9 +10,8 @@ function addsite(){
 		sites = data.blacklist
 		var newsite = $("#newsite").val();
 		sites[sites.length] = newsite;
-		alert("test: " + newsite);
 		chrome.storage.sync.set({"blacklist": sites}, function(){});
-		$("#sitelist").append("<p>" + newsite + "<p>");
+		addsitetolist(newsite);
 	});
 }
 
@@ -25,8 +24,47 @@ function initialize(){
 		sites = data.blacklist
 	
 		for(site = 0; site < sites.length; site++){
-			$("#sitelist").append("<p>" + sites[site] + "</p>");
+			addsitetolist(sites[site]);
 		}
-		
 	});
 };
+
+function addsitetolist(site){
+$("#sitelist").append(
+    $("<li>")
+        .append(
+            $("<span>")
+                .text(site))
+        .append(
+            $("<span>")
+                .addClass("helper"))
+        .append(
+            $("<img>")
+                .attr("src", "erase.png")
+                .addClass("deleteimg")
+		.click(function(){
+			var li = $(this).parent();
+			var itemtoremove = li.first().text();
+			var indextoremove = -1;
+
+			chrome.storage.sync.get("blacklist", function(data) {
+			sites = data.blacklist
+	
+			for(site = 0; site < sites.length; site++){
+				if(sites[site] == itemtoremove){
+					indextoremove = site;
+					break;
+				}
+			}
+			
+			if(indextoremove != -1){
+				sites.splice(indextoremove, 1);
+				chrome.storage.sync.set({"blacklist": sites}, function(){});
+				li.remove();
+			}
+		});			
+			
+})));
+
+	
+}

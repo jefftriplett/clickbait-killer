@@ -1,0 +1,24 @@
+#mainlist {
+overflow-y: auto;
+max-height: 300px;
+}
+
+#sitelist {
+margin: 0;
+padding: 5px;
+}
+
+li{
+padding: 2px 0;
+}
+
+.helper {
+display: inline-block;
+height: 100%;
+vertical-align: middle;
+text-align: middle;
+}
+
+.deleteimg {
+vertical-align: middle;
+}
