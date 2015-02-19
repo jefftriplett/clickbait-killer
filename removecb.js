@@ -42,10 +42,11 @@ function removeOffendingPost()  {
 	});
 }
 
-initializeStorage();
-initializePostsRemoved();
-// Find all changes to the dom that are in the Facebook Feed Stream
-removeOffendingPost();
-setInterval(removeOffendingPost, 7000);
+initializeStorage(function() {
+	initializePostsRemoved();
+	// Find all changes to the dom that are in the Facebook Feed Stream
+	removeOffendingPost();
+	setInterval(removeOffendingPost, 7000);
+});
 
 });

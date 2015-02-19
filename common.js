@@ -1,10 +1,25 @@
-function initializeStorage(){
+function initializeStorage(callback){
 	chrome.storage.sync.get("blacklist", function(data){
 		if(data.blacklist == null){
-			var defaults = ['sueddeutsche.de', 'spiegel.de', 'petflow.com', 'upworthy.com', 'lifebuzz.com', 'oddcrunch.com'];
+			var defaults = ['buzzfeed.com', 
+					'buzzpo.com', 
+					'petflow.com', 
+					'upworthy.com', 
+					'lifebuzz.com', 
+					'oddcrunch.com',
+					'tpnn.com',
+					'deadspin.com',
+					'cracked.com',
+					'viralnova.com',
+					'distractify.com',
+					'thepoliticalinsider.com',
+					];
 
 			// Store the default	
-			chrome.storage.sync.set({"blacklist": defaults}, function(){});
+			chrome.storage.sync.set({"blacklist": defaults}, callback);
+		}
+		else{
+			callback();
 		}
 	});
 }

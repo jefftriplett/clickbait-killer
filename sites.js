@@ -17,20 +17,21 @@ function addsite(){
 
 function initialize(){
 	// Do initialization - they have never been here before
-	initializeStorage();
+	initializeStorage(function() {
 
-	// Now grab them
-	chrome.storage.sync.get("blacklist", function(data) {
-		sites = data.blacklist
+		// Now grab them
+		chrome.storage.sync.get("blacklist", function(data) {
+			sites = data.blacklist
 	
-		for(site = 0; site < sites.length; site++){
-			addsitetolist(sites[site]);
-		}
-	});
+			for(site = 0; site < sites.length; site++){
+				addsitetolist(sites[site]);
+			}
+		});
 
-	// Set the totals
-	getPostsRemoved(function(count){
-		$("#postsremoved").text(count);	
+		// Set the totals
+		getPostsRemoved(function(count){
+			$("#postsremoved").text(count);	
+		});
 	});
 };
 

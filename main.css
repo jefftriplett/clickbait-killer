@@ -1,5 +1,6 @@
 body{
 background-color: #E6E6E6;
+width: 200px;
 }
 
 h1 {
@@ -15,6 +16,7 @@ color: red;
 
 #mainlist {
 overflow-y: auto;
+overflow-x: auto;
 max-height: 300px;
 margin-bottom: 10px;
 border-style: groove;
@@ -36,7 +38,6 @@ color: green;
 }
 
 button {
-margin: 3px 0;
 float: right;
 }
 
