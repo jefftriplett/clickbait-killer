@@ -33,9 +33,9 @@ function removeOffendingPost()  {
 			
 				if(found_fkeyword){
 					console.log( "Removed an article from: " + filter_keywords[fkeyword])
-					$(posts[post]).css("background-color", "red");
+					//$(posts[post]).css("background-color", "red");
 					posts[post].remove();
-					 chrome.storage.sync.set({'value': 0});
+					increasePostsRemoved();
 				}
 			}
 		}
@@ -43,7 +43,7 @@ function removeOffendingPost()  {
 }
 
 initializeStorage();
-
+initializePostsRemoved();
 // Find all changes to the dom that are in the Facebook Feed Stream
 removeOffendingPost();
 setInterval(removeOffendingPost, 7000);

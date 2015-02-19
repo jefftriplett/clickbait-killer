@@ -27,6 +27,11 @@ function initialize(){
 			addsitetolist(sites[site]);
 		}
 	});
+
+	// Set the totals
+	getPostsRemoved(function(count){
+		$("#postsremoved").text(count);	
+	});
 };
 
 function addsitetolist(site){
