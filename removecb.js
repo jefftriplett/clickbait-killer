@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 function removeOffendingPost()  {
+	// console.log("check");
 	// Load in the filters
 	chrome.storage.sync.get("blacklist", function(data){
 		var filter_keywords = data.blacklist
@@ -44,9 +45,11 @@ function removeOffendingPost()  {
 
 initializeStorage(function() {
 	initializePostsRemoved();
+
 	// Find all changes to the dom that are in the Facebook Feed Stream
-	removeOffendingPost();
-	setInterval(removeOffendingPost, 7000);
+	setAdjustableTimeoutInterval(removeOffendingPost);
 });
 
+
+// Closing tag
 });

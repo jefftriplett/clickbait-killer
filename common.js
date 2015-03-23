@@ -33,8 +33,6 @@ function initializePostsRemoved(){
 	});
 }
 
-var lock = 0;
-
 function increasePostsRemoved(){
 	chrome.storage.sync.get("postsremoved", function(data){
 		if(data.postsremoved == null){
@@ -58,7 +56,29 @@ function getPostsRemoved(callback){
 			callback(data.postsremoved);
 		}
 	});
+}
 
+function getCurrentTimeout(callback){
+	chrome.storage.sync.get("timeout", function(data){
+		if(data.timeout == null){
+			// Store the default	
+			chrome.storage.sync.set({"timeout": 5}, callback(5));
+		}
+		else{
+			callback(data.timeout);
+		}
+	});
+}
+
+function setAdjustableTimeoutInterval(callback)
+{
+	// Call the method to do the work
+	callback();
+	
+	getCurrentTimeout(function (timeout) {
+		// Wait for the amount of time and then call this function again
+		window.setTimeout(function() { setAdjustableTimeoutInterval(callback); }, timeout * 1000);
+	});
 }
 
 
